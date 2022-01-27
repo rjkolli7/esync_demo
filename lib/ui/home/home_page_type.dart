@@ -1,0 +1,1 @@
+enum HomePageType { products, profile }
