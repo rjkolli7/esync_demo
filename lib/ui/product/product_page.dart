@@ -1,8 +1,8 @@
 import 'package:esync_demo/controllers/product_controller.dart';
 import 'package:esync_demo/domain/model/response/products_response.dart';
+import 'package:esync_demo/helper/test_styles.dart';
 import 'package:esync_demo/ui/product/product_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 class ProductsPage extends StatefulWidget {
@@ -32,58 +32,75 @@ class ProductsPageState extends State<ProductsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Visibility(
-            visible: GetPlatform.isWeb,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: MaterialButton(
-                onPressed: () {
-                  setState(() {
-                    isGrid = !isGrid;
-                  });
-                },
-                shape: const CircleBorder(),
-                color: Colors.white,
-                elevation: 8,
-                child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Icon(isGrid ? Icons.list : Icons.grid_view)),
-              ),
-            ),
-          ),
-          isGrid
-              ? GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: products?.length ?? 0,
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
+    return (products != null && products!.isNotEmpty)
+        ? Container(
+            padding: const EdgeInsets.symmetric(vertical: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Visibility(
+                  visible: GetPlatform.isWeb,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: MaterialButton(
+                      onPressed: () {
+                        setState(() {
+                          isGrid = !isGrid;
+                        });
+                      },
+                      shape: const CircleBorder(),
+                      color: Colors.white,
+                      elevation: 8,
+                      child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Icon(isGrid ? Icons.list : Icons.grid_view)),
+                    ),
                   ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return ProductItem(
-                      product: products![index],
-                    );
-                  },
-                )
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: List.generate(products?.length ?? 0, (index) {
-                    return ListTile(
-                      title: ProductItem(
-                        product: products![index],
-                      ),
-                    );
-                  }),
                 ),
-        ],
-      ),
-    );
+                isGrid
+                    ? GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: products?.length ?? 0,
+                        shrinkWrap: true,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                        ),
+                        itemBuilder: (BuildContext context, int index) {
+                          return ProductItem(
+                            product: products![index],
+                          );
+                        },
+                      )
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: List.generate(products?.length ?? 0, (index) {
+                          return ListTile(
+                            title: ProductItem(
+                              product: products![index],
+                            ),
+                          );
+                        }),
+                      ),
+              ],
+            ),
+          )
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: context.height - 100,
+                alignment: Alignment.center,
+                child: const Text(
+                  'No Products\nStart Adding Products to See Here',
+                  textAlign: TextAlign.center,
+                  style: TextStyles.titleTextStyle,
+                ),
+              )
+            ],
+          );
   }
 }

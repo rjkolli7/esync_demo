@@ -61,49 +61,54 @@ class _ProfilePageState extends State<ProfilePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 30),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    FirstNameFormField(key: _firstNameKey),
-                    LastNameFormField(key: _lastNameKey),
-                    EmailTextFormField(
-                      key: _emailKey,
-                      enabled: false,
-                    ),
-                    PhoneTextFormField(key: _phoneKey),
-                    GenderFormField(key: _genderKey),
-                    DobFormField(key: _dateKey),
-                    const SizedBox(height: 30),
-                    StyledMaterialButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          updateProfile(profile);
-                        }
-                      },
-                      title: 'Update Profile',
-                    ),
-                    const SizedBox(height: 30),
-                    Visibility(
-                      visible: GetPlatform.isMobile,
-                      child: StyledMaterialButton(
-                        onPressed: () {
-                          showLogoutDialog();
-                        },
-                        title: 'Logout',
+          Container(
+            width: context.width,
+            height: context.height,
+            alignment: Alignment.center,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      FirstNameFormField(key: _firstNameKey),
+                      LastNameFormField(key: _lastNameKey),
+                      EmailTextFormField(
+                        key: _emailKey,
+                        enabled: false,
                       ),
-                    ),
-                    const SizedBox(height: 50),
-                  ],
+                      PhoneTextFormField(key: _phoneKey),
+                      GenderFormField(key: _genderKey),
+                      DobFormField(key: _dateKey),
+                      const SizedBox(height: 30),
+                      StyledMaterialButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            updateProfile(profile);
+                          }
+                        },
+                        title: 'Update Profile',
+                      ),
+                      const SizedBox(height: 30),
+                      Visibility(
+                        visible: GetPlatform.isMobile,
+                        child: StyledMaterialButton(
+                          onPressed: () {
+                            showLogoutDialog();
+                          },
+                          title: 'Logout',
+                        ),
+                      ),
+                      const SizedBox(height: 50),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
+          )
         ],
       );
     });

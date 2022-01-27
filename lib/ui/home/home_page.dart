@@ -182,20 +182,35 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: GetPlatform.isWeb
-              ? homePage == HomePageType.profile
-                  ? 400
-                  : double.infinity
-              : double.infinity,
-          padding: GetPlatform.isWeb
-              ? homePage == HomePageType.profile
-                  ? EdgeInsets.zero
-                  : const EdgeInsets.symmetric(horizontal: 100)
-              : const EdgeInsets.symmetric(horizontal: 20),
-          child: getCurrentPage(),
-        ),
+      body: homePage == HomePageType.profile
+          ? Center(
+              child: body(),
+            )
+          : body(),
+    );
+  }
+
+  Widget body() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            alignment: Alignment.center,
+            width: GetPlatform.isWeb
+                ? homePage == HomePageType.profile
+                    ? 400
+                    : double.infinity
+                : double.infinity,
+            padding: GetPlatform.isWeb
+                ? homePage == HomePageType.profile
+                    ? EdgeInsets.zero
+                    : const EdgeInsets.symmetric(horizontal: 100)
+                : const EdgeInsets.symmetric(horizontal: 20),
+            child: getCurrentPage(),
+          )
+        ],
       ),
     );
   }

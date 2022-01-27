@@ -41,43 +41,6 @@ void showErrorDialog(BuildContext context, String title, Exception e) {
 }
 
 void showLogoutDialog() {
-  /*AlertDialog(
-    title: const Text(
-      'Logout',
-      style: TextStyle(fontSize: 24),
-    ),
-    content: SingleChildScrollView(
-      child: ListBody(
-        children: const <Widget>[
-          Text(
-            StringHelper.logoutMessage,
-            style: TextStyle(fontSize: 18),
-          ),
-        ],
-      ),
-    ),
-    actions: <Widget>[
-      TextButton(
-        onPressed: () {
-          Navigator.of(Get.context!).pop();
-        },
-        child: const Text(
-          StringHelper.no,
-        ),
-      ),
-      GetBuilder<AuthController>(builder: (authController) {
-        return TextButton(
-          onPressed: () async {
-            await authController.logout();
-            Get.offAll(Routes.auth);
-          },
-          child: const Text(
-            StringHelper.yes,
-          ),
-        );
-      }),
-    ],
-  ),*/
   AuthBindings().dependencies();
   var authController = Get.find<AuthController>();
   Get.defaultDialog(
@@ -96,3 +59,5 @@ void showLogoutDialog() {
     },
   );
 }
+
+void showAddProductDialog() {}
